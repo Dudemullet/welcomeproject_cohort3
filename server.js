@@ -2,11 +2,14 @@ var express = require('express');
 var app = express();
 var cors = require('express-cors')
 
-app.use(cors({
-  allowedOrigins: [
-    'mks.io'
-  ]
-}))
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+app.use(express.static('./'));
 
 var http = require('http').Server(app);
 var io = require("socket.io")(http);
@@ -16,7 +19,6 @@ var config = {
 };
 
 io.on('connection',function(socket) {
-
   console.log("a user connected");
 
   socket.on('disconnect', function() {
@@ -33,6 +35,7 @@ io.on('connection',function(socket) {
     console.log("a user joined room " + room);
   });
 })
+
 
 http.listen(config.port, function(){
   console.log('listening on *:' + config.port);
