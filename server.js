@@ -25,14 +25,8 @@ io.on('connection',function(socket) {
     console.log("user disconnected");
   });
 
-  socket.on('chat message', function(msg) {
-    console.log("msg: " + msg);
-    io.to(msg.room).emit('receive message', msg);
-  });
-
-  socket.on('join room', function(room){
-    socket.join(room);
-    console.log("a user joined room " + room);
+  socket.on('sendMsg', function(msg) {
+    socket.broadcast.emit('msg', msg);
   });
 })
 
