@@ -2,7 +2,7 @@
 Implement the necessary methods to have a working chat room.
 
 ## Server interaction
-There are 2 ways of interaction the chat server. You sending messages or recieving messages. The way you send messages is visa the `socket.emit` function. You listen, *or recieve*, for messages via `socket.on` function.
+There are 2 ways of interaction the chat server. You send messages or recie messages. The way you send messages is via the `socket.emit` function. You listen, *or recieve*, for messages via `socket.on` function.
 
 ### Format
 - `socket.emit('event_name', msg)`
@@ -19,10 +19,12 @@ These events the server will **send to you**.
 - `msg` This is the server sending you a new message.
 
 ## Steps to get chat working
+
 ### Function 1
 - Onclicking the 'send' button get the text from the input field
 - Clear the text from the field
-- send the `sendMsg` to the server and include the chat message
+- Send the `sendMsg` to the server and include the chat message
+- Append your own message to the messageList
 
 ### Function 2
 - Listen for the `msg` event

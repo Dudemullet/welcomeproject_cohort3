@@ -24,21 +24,26 @@
     <script>
       var socket = io("http://10.0.1.105:8080");
 
-      $('form').submit(function(){
-        socket.emit('chat message', $('#m').val());
-        $('#m').val('');
-        return false;
-      });
+      // Implement function 1 here
 
-      socket.on('chat message', function(msg){
-        console.log("message recieved" + msg);
-        $('#messages').append($('<li>').text(msg));
-      });
 
+      // Implement function 2 here
+
+
+
+
+      /*
+         Example socket.io useage
+      */
+
+      // sends the 'placeholder' event with the message 'hello world'
+      socket.emit("placeholder", "hello world");
+
+      // Recieving the 'connected' event, and printing the servers message to console.
       socket.on('connected', function(msg) {
         console.log("connected");
-        console.log(msg);
       });
+
     </script>
   </body>
 </html>
