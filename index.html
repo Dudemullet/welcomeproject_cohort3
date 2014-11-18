@@ -8,7 +8,7 @@
       #messageForm input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
       #messageForm button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
       #messageList { list-style-type: none; margin: 0; padding: 0; }
-      #messageList li { padding: 5px 10px; }
+      #messageList li { padding: 5px 10px; font-size: 2em;}
       #messageList li:nth-child(odd) { background: #eee; }
     </style>
   </head>
@@ -24,12 +24,38 @@
     <script>
       var socket = io("http://10.0.1.105:8080");
 
-      // Implement function 1 here
+      $("#sendBtn").on("click", function() {
+        var msg = $('#message').val();
+        var obj = {"user": "Pipe", "msg":msg,"color":"green"};
+        var sendMsg = JSON.stringify(obj);
 
+        socket.emit('sendMsg', sendMsg);
 
-      // Implement function 2 here
+        var str = parseObj(obj);
+        $('#messageList').append("<li>"+ str +"</li>");
+        $('#message').val("");
+      });
 
+      var parseObj = function(obj) {
+        var color = obj.color;
+        var user = "<span style='color:"+color+"'>"+obj.user+"</span>";
+        var msg = obj.msg;
+        return user + ": " + msg;;
+      }
 
+      socket.on('msg', function(obj){
+        obj = JSON.parse(obj);
+        var str = parseObj(obj);
+        $('#messageList').append("<li>"+ str +"</li>");
+      });
     </script>
   </body>
 </html>
+
+
+
+
+
+
+
+
